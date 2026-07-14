@@ -1,0 +1,7 @@
+beam	process	spin_config	q2_bin	cross_section_pb	notes
+9x275	DIS-CC	eMinus-pPlus	q2_100to1000	21.440	DJANGOH/HERACLES total cross section
+9x275	DIS-CC	eMinus-pMinus	q2_100to1000	9.5747	DJANGOH/HERACLES total cross section
+9x275	DIS-CC	eMinus-pPlus	q2_1000to3000	10.321	DJANGOH/HERACLES total cross section
+9x275	DIS-CC	eMinus-pMinus	q2_1000to3000	3.0338	DJANGOH/HERACLES total cross section
+9x275	DIS-CC	eMinus-pPlus	q2_3000to9000	1.2666	DJANGOH/HERACLES total cross section
+9x275	DIS-CC	eMinus-pMinus	q2_3000to9000	0.30165	DJANGOH/HERACLES total cross section
