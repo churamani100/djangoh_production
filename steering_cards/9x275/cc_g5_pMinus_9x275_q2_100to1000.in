@@ -1,0 +1,57 @@
+OUTFILENAM
+cc_g5_eMinus_pMinus_9x275_q2_100to1000
+TITLE
+Polarized charged-current Wminus DIS for g5, 9x275, proton helicity minus, Q2 100to1000
+EL-BEAM
+            9D0    -1.0D0    -1
+PR-BEAM
+            275D0   -1.0D0
+GSW-PARAM
+            2 1 3 1 1 1 2 1 1 1 1
+KINEM-CUTS
+            3   0D0  1.00D0  0.01D0  0.95D0  1.0D2  1.0D3  1.4D0
+EGAM-MIN
+            0D0
+INT-OPT-NC
+            0 0 0 0 0   0 0 0 0
+INT-OPT-CC
+1 20 0 20
+INT-ONLY
+1
+INT-POINTS
+            30000
+SAM-OPT-NC
+            0 0 0 0 0   0 0 0 0
+SAM-OPT-CC
+1 1 0 1
+NUCLEUS
+            275D0   1   1
+NUCL-MOD
+            0
+STRUCTFUNC
+0 1 9
+POLPDF
+            100
+FLONG
+            0  0.01  0.03
+ALFAS
+            1   0   0.20   0.235
+NFLAVORS
+            0   5
+IOUNITS
+            6  10  11
+RNDM-SEEDS
+            -1   -1
+START
+            500000
+SOPHIA
+            1.5
+OUT-LEP
+            1
+FRAG
+            1
+CASCADES
+            1
+MAX-VIRT
+            5
+CONTINUE

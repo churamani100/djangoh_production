@@ -1,0 +1,18 @@
+# Large generated files: do not commit
+*.root
+*.hepmc
+*.hepmc3
+*_evt.dat
+*.hipo
+
+# Logs
+*.nohup.log
+nohup.out
+core.*
+*.tmp
+
+# Cache/editor
+__pycache__/
+*.pyc
+.DS_Store
+*.swp
