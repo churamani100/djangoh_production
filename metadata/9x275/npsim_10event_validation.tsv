@@ -1,0 +1,7 @@
+sample	exit_code	events_saved	output_size_bytes	status
+cc_g5_eMinus_pMinus_9x275_q2_1000to3000	0	10	10870237	PASS
+cc_g5_eMinus_pMinus_9x275_q2_100to1000	0	10	14454664	PASS
+cc_g5_eMinus_pMinus_9x275_q2_3000to9000	0	10	10866796	PASS
+cc_g5_eMinus_pPlus_9x275_q2_1000to3000	0	10	14420954	PASS
+cc_g5_eMinus_pPlus_9x275_q2_100to1000	0	10	15534670	PASS
+cc_g5_eMinus_pPlus_9x275_q2_3000to9000	0	10	10554492	PASS

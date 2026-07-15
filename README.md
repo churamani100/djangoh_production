@@ -1,119 +1,85 @@
-# DJANGOH/HERACLES 4.6.10 CC DIS 9x275 Production
+# DJANGOH 9x275 Charged-Current DIS Production Inputs
 
-This repository tracks the steering files, conversion scripts, metadata, and documentation used to generate 9x275 GeV charged-current DIS samples for EIC simulation production.
+## Release tag
 
-Large generated files are **not** stored in this repository. The repository is for reproducibility: steering cards, scripts, metadata, cross sections, checksums, and workflow documentation.
+`DJANGOH4.6.10-1.0`
 
-## Dataset release tag
+The release name follows the EIC convention for an externally maintained
+generator with locally maintained steering and preprocessing:
 
-DJANGOH-HERACLES4.6.10-1.0
+- DJANGOH generator version: 4.6.10
+- Steering/preprocessing release: 1.0
 
-## Generator
+The Git repository containing the steering files and preprocessing scripts
+must use the matching release tag:
 
-Generator: DJANGOH/HERACLES  
-Generator version: 4.6.10  
-Beam energy: 9x275 GeV  
-Process: charged-current DIS  
-Reaction: e- p -> nu X
+`DJANGOH4.6.10-1.0`
 
-## Spin configurations
+## Included datasets
 
-- eMinus-pPlus
-- eMinus-pMinus
+This package contains exactly six production input files:
 
-## Q2 bins
+- eMinus-pPlus, Q2 = 100--1000 GeV2
+- eMinus-pPlus, Q2 = 1000--3000 GeV2
+- eMinus-pPlus, Q2 = 3000--9000 GeV2
+- eMinus-pMinus, Q2 = 100--1000 GeV2
+- eMinus-pMinus, Q2 = 1000--3000 GeV2
+- eMinus-pMinus, Q2 = 3000--9000 GeV2
 
-- q2_100to1000
-- q2_1000to3000
-- q2_3000to9000
+No 1k, 5k, or 18x275 files are included.
 
-The higher Q2 bin above 10000 GeV2 is not used for 9x275 because it exceeds the physical kinematic reach.
+## Physics process
 
-## Cross sections
+Charged-current deep-inelastic scattering at 9x275 GeV:
 
-The DJANGOH/HERACLES total cross sections for the 9x275 q2-binned samples are stored in:
+`e- + p -> neutrino + X`
 
-metadata/9x275/cross_sections_9x275.tsv
+The pPlus and pMinus labels identify the two polarization configurations
+used in the DJANGOH steering files.
 
-| Beam | Process | Spin configuration | Q2 bin | Cross section [pb] |
-|---|---|---|---|---:|
-| 9x275 | DIS-CC | eMinus-pPlus | q2_100to1000 | 21.440 |
-| 9x275 | DIS-CC | eMinus-pMinus | q2_100to1000 | 9.5747 |
-| 9x275 | DIS-CC | eMinus-pPlus | q2_1000to3000 | 10.321 |
-| 9x275 | DIS-CC | eMinus-pMinus | q2_1000to3000 | 3.0338 |
-| 9x275 | DIS-CC | eMinus-pPlus | q2_3000to9000 | 1.2666 |
-| 9x275 | DIS-CC | eMinus-pMinus | q2_3000to9000 | 0.30165 |
+## Preprocessing chain
 
-## Required production output format
+1. Generate events with DJANGOH 4.6.10 and HERACLES.
+2. Convert DJANGOH event output using eic-smear BuildTree.
+3. Convert the eic-smear tree with TreeToHepMC in HepMC3 mode.
+4. Construct a transport-level event record:
+   - retain incoming status-4 electron and proton beam particles;
+   - retain status-1 final-state detector particles;
+   - remove generator-history partons, W bosons, strings and diquarks;
+   - omit final-state neutrinos from detector transport.
+5. Apply the EIC afterburner profile:
+   `ip6_hidiv_275x9`
+6. Store the resulting events in:
+   `hepmc3.tree.root`
+7. Validate every file with npsim using the epic_craterlake detector geometry.
 
-Final production files are provided as:
+## Required filename format
 
-hepmc3.tree.root
-
-Required file naming convention:
-
-<generator repository release tag>_<physics process>_<electron momentum>x<proton momentum>_q2_<minimum q2>to<maximum q2>_run<index>.hepmc3.tree.root
-
-Example:
-
-DJANGOH-HERACLES4.6.10-1.0_DIS-CC-eMinus-pPlus_9x275_q2_100to1000_run001.hepmc3.tree.root
-
-## Production directory convention
-
-DIS/CC/<spin configuration>/DJANGOH-HERACLES4.6.10-1.0/9x275/q2_<minimum q2>to<maximum q2>/
+`<release-tag>_<process>_<beam>_q2_<range>_run<index>.hepmc3.tree.root`
 
 Example:
 
-DIS/CC/eMinus_pPlus/DJANGOH-HERACLES4.6.10-1.0/9x275/q2_100to1000/
+`DJANGOH4.6.10-1.0_DIS-CC-eMinus-pPlus_9x275_q2_100to1000_run001.hepmc3.tree.root`
 
-## Official preprocessing chain
+## Directory organization
 
-The validated preprocessing chain is:
+`DIS/CC/<polarization>/<release-tag>/9x275/q2_<range>/<filename>`
 
-DJANGOH 4.6.10 _evt.dat
-  -> EIC2020b eic-smear BuildTree
-  -> EIC2021a TreeToHepMC(..., false)
-  -> HepMC3 Asciiv3
-  -> afterburner abconv -p ip6_hidiv_275x9
-  -> hepmc3.tree.root
+## Metadata
 
-Critical command:
+- `metadata/datasets.tsv`: event totals, cross sections, source paths and
+  staged paths.
+- `metadata/checksums.sha256`: SHA-256 checksums.
+- `metadata/npsim_100event_validation.tsv`: 100-event npsim validation.
+- `steering_files/9x275/`: DJANGOH steering cards.
+- `scripts/`: transport cleaning, afterburner and validation scripts.
 
-TreeToHepMC("input_evt.root", ".", -1, false);
+## Repository
 
-The final false is required because it writes HepMC3 Asciiv3. The true option writes old HepMC2 and is not used for production.
+Current working repository:
 
-## Validation
+`https://github.com/churamani100/djangoh_production`
 
-The workflow was first validated using a 4999-event test sample. The final afterburned ROOT output contained:
-
-hepmc3_tree entries = 4999
-
-For each final ROOT file, entries are checked with:
-
-/opt/local/bin/root -l -b -q file.hepmc3.tree.root \
-  -e 'TTree *t=(TTree*)_file0->Get("hepmc3_tree"); if(t) cout<<t->GetEntries()<<endl;'
-
-## Metadata files
-
-- metadata/9x275/production_manifest_9x275.tsv
-- metadata/9x275/cross_sections_9x275.tsv
-- metadata/9x275/sha256sum_9x275_final_root_files.txt
-
-## Repository contents
-
-- steering_cards/9x275/
-- scripts/
-- metadata/9x275/
-- production_notes/
-
-## Large files excluded from Git
-
-The following generated files are not stored in this repository:
-
-- _evt.dat
-- .hepmc
-- .root
-- .hepmc3.tree.root
-
-Final hepmc3.tree.root files should be stored on the appropriate production storage endpoint, such as JLab xrootd or S3.
+For formal campaign acceptance, the repository and matching release tag
+should be transferred to or mirrored under an EIC, Jefferson Lab or BNL
+GitHub organization.
