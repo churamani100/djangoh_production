@@ -26,8 +26,6 @@ This package contains exactly six production input files:
 - eMinus-pMinus, Q2 = 1000--3000 GeV2
 - eMinus-pMinus, Q2 = 3000--9000 GeV2
 
-No 1k, 5k, or 18x275 files are included.
-
 ## Physics process
 
 Charged-current deep-inelastic scattering at 9x275 GeV:
@@ -83,3 +81,7 @@ Current working repository:
 For formal campaign acceptance, the repository and matching release tag
 should be transferred to or mirrored under an EIC, Jefferson Lab or BNL
 GitHub organization.
+
+## Contact
+
+Churamani Paudel (cpaudel@nmsu.edu, churaman@jlab.org)
