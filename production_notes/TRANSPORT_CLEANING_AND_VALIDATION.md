@@ -54,8 +54,6 @@ This release contains exactly six 9x275 charged-current DIS inputs:
 - eMinus-pMinus, Q2 1000 to 3000 GeV2
 - eMinus-pMinus, Q2 3000 to 9000 GeV2
 
-No 1k, 5k or 18x275 datasets are included.
-
 ## Validation
 
 For all six files:
