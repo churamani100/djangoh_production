@@ -56,3 +56,9 @@ No 1k, 5k or 18x275 datasets are included.
 ## Repository
 
 `https://github.com/churamani100/djangoh_production`
+## Contact
+
+**Churamani Paudel**
+
+- New Mexico State University: cpaudel@nmsu.edu
+- Jefferson Lab: churaman@jlab.org
