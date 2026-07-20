@@ -1,0 +1,7 @@
+sample	input_events	written_events	skipped_parton	skipped_empty	root_entries	status
+cc_g5_eMinus_pMinus_9x275_q2_100to1000	499952	499952	0	0	499952	PASS
+cc_g5_eMinus_pMinus_9x275_q2_1000to3000	499976	499976	0	0	499976	PASS
+cc_g5_eMinus_pMinus_9x275_q2_3000to9000	999955	999955	0	0	999955	PASS
+cc_g5_eMinus_pPlus_9x275_q2_100to1000	499936	499936	0	0	499936	PASS
+cc_g5_eMinus_pPlus_9x275_q2_1000to3000	499977	499977	0	0	499977	PASS
+cc_g5_eMinus_pPlus_9x275_q2_3000to9000	999949	999949	0	0	999949	PASS
